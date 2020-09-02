@@ -4,7 +4,7 @@ namespace Core;
 
 class Routes
 {
-    private array $routes;
+    private $routes;
     
     //paths format: part1/part2/:param1/:param2
     //routes format: Folder1/Folder2/Controller.method

@@ -8,9 +8,9 @@ use Core\Config;
 
 class Router 
 {
-    private string $path;
-    private array $pathParts;
-    private array $routes;
+    private $path;
+    private $pathParts;
+    private $routes;
 
     public function __construct()
     {
