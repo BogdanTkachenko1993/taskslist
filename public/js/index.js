@@ -2,7 +2,7 @@
     'use strict';
     window.addEventListener('load', function() {
         bootstrapValidation();
-        addPaginationToTasksTable();
+        addPaginationAndSortingToTasksTable();
         removeSuccessAlert();
         changeCompletionStatus();
         editTask();
@@ -23,7 +23,7 @@ function bootstrapValidation()
     });
 }
 
-function addPaginationToTasksTable()
+function addPaginationAndSortingToTasksTable()
 {
     if ($('#tasksTable tbody tr').length < 4)
         {
