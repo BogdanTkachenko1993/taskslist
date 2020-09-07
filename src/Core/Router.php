@@ -3,8 +3,6 @@
 namespace Core;
 
 use \Exception;
-use \PDO;
-use Core\Config;
 
 class Router 
 {
