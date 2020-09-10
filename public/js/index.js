@@ -75,7 +75,7 @@ function changeCompletionStatus()
                 event.target.parentNode.children[1].innerText = "Нет";
             }
             $.ajax({
-                url: "/changeCompletionStatus/" + taskId,
+                url: "./changeCompletionStatus/" + taskId,
                 method: "POST",
                 data: {completionStatus: completionStatus},
                 success: function(response){
@@ -84,7 +84,7 @@ function changeCompletionStatus()
                         response = JSON.parse(response);
                         if (response.error == 'unauthorized')
                         {
-                            window.location.replace('/loginPage');
+                            window.location.replace('./loginPage');
                         }
                     }
                 }
@@ -115,7 +115,7 @@ function editTask()
             taskTextTableCell.classList.remove('table-success');
             taskTextTableCell.setAttribute('contenteditable', 'false');
             $.ajax({
-                url: "/editTaskText/" + taskId,
+                url: "./editTaskText/" + taskId,
                 method: "POST",
                 data: {taskText: button.parentNode.parentNode.children[2].innerHTML},
                 success: function(response){
@@ -124,12 +124,12 @@ function editTask()
                         response = JSON.parse(response);
                         if (response.error == 'unauthorized')
                         {
-                            window.location.replace('/loginPage');
+                            window.location.replace('./loginPage');
                         }
                     }
                     else
                     {
-                        window.location.replace('/');
+                        window.location.replace('./');
                     }
                 }
             });

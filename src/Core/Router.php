@@ -12,7 +12,7 @@ class Router
 
     public function __construct()
     {
-        $this->path = trim(filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL),'/');
+        $this->path = $this->getPath();
         $this->pathParts = explode('/', $this->path);
         $this->routes = (new Routes())->getRoutes();
     }
@@ -45,6 +45,14 @@ class Router
 
         $params = $this->extractParams($route);
         return call_user_func_array([$controller, $method], $params);
+    }
+
+    private function getPath()
+    {
+        $path = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
+        $path = str_replace(Utils::getBaseUri(), '', $path);
+        $path = trim($path, '/');
+        return $path;
     }
 
     private function findRoute ()

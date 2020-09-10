@@ -13,7 +13,7 @@ class Config
     {
         if (!isset(self::$pdo))
         {
-            self::$pdo = new PDO('mysql:host=localhost;dbname=tasks_list;', 'root', '' );
+            self::$pdo = new PDO('mysql:host=localhost;dbname=tasks_list;', 'root', '');
             self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return self::$pdo;

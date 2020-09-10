@@ -5,17 +5,17 @@
 {% block content %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Список задач</a>
+    <a class="navbar-brand" href="">Список задач</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
         {% if session.username is empty %}
         <div class="ml-auto">
-            <a class="btn btn-primary my-2 my-sm-0" href="/loginPage">Войти</a>
+            <a class="btn btn-primary my-2 my-sm-0" href="./loginPage">Войти</a>
         </div>
         {% else %}
-            <form class="form-inline ml-auto" method="POST" action="/logout">
+            <form class="form-inline ml-auto" method="POST" action="./logout">
                 <h4>{{session.username}}&nbsp;&nbsp;</h4>
                 <button class="btn btn-danger my-2 my-sm-0" type="submit">Выйти</button>
             </form>
@@ -85,7 +85,7 @@
                 Задача добавлена успешно
             </div>
             {% endif %}
-            <form id="add-task-form" action="/tasks/add" method="POST" class="needs-validation" novalidate>
+            <form id="add-task-form" action="./tasks/add" method="POST" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="username">Имя пользователя</label>
                     <input type="text" class="form-control" id="username" name="username" autocomplete="off" required>

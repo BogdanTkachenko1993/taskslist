@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Core\Config;
+use Core\Utils;
 
 abstract class Controller
 {
@@ -15,6 +16,6 @@ abstract class Controller
 
     public function redirect($location)
     {
-        header("Location: " . $location, true, 301);
+        header("Location: " . Utils::getBaseUri() . $location, true, 301);
     }
 }
