@@ -31,11 +31,11 @@
                 <table class="table table-bordered" id="tasksTable" data-page-length='3'>
                     <thead>
                     <tr>
-                        <th scope="col">Имя пользователя</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col" class="col-6">Текст задачи</th>
-                        <th scope="col" class="col-1">Выполнено</th>
-                        <th scope="col" class="col-1">Отредактировано администратором</th>
+                        <th scope="col"><a href="" class="asc">Имя пользователя</a></th>
+                        <th scope="col"><a href="" class="asc">E-mail</a></th>
+                        <th scope="col" class="col-6"><a href="" class="asc">Текст задачи</a></th>
+                        <th scope="col" class="col-1"><a href="" class="asc">Выполнено</a></th>
+                        <th scope="col" class="col-1"><a href="" class="asc">Отредактировано администратором</a></th>
                         {% if session.username is not empty %}
                             <th scope="col" class="col-1">Редактировать</th>
                         {% endif %}
@@ -74,6 +74,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                <ul class="pagination justify-content-center"></ul>
             </div>
         </div>
     {% endif %}
@@ -113,4 +114,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="./js/index.js"></script>
 {% endblock %}

@@ -14,7 +14,7 @@ class Task extends Model
 
     public function add()
     {
-        $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+        $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
         $email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
         $taskText = filter_var($_POST['taskText'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 

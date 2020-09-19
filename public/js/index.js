@@ -1,61 +1,27 @@
+import {bootstrapValidation} from "./bootstrap.js"
+import {Paginator} from "./Paginator.js"
 (function() {
-    'use strict';
     window.addEventListener('load', function() {
-        bootstrapValidation();
-        addPaginationAndSortingToTasksTable();
-        removeSuccessAlert();
         changeCompletionStatus();
         editTask();
+        let paginatedElement = document.querySelector('#tasksTable tbody');
+        let paginationElement = document.querySelector('ul.pagination');
+        let tableData = document.querySelectorAll('#tasksTable tbody tr');
+        let rowsPerPage = 3;
+        let paginator = new Paginator(tableData, paginatedElement, paginationElement, rowsPerPage);
+        paginator.AddPagination();
+        addSorting(paginator);
+        bootstrapValidation();
+        removeSuccessAlert();
     }, false);
   })();
-
-function bootstrapValidation()
-{
-    var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-    form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-            form.classList.add('was-validated');
-        }, false);
-    });
-}
-
-function addPaginationAndSortingToTasksTable()
-{
-    if ($('#tasksTable tbody tr').length < 4)
-        {
-            $('#tasksTable').DataTable(
-                {
-                    "searching": false,
-                    "lengthChange": false,
-                    "info": false,
-                    "paging": false,
-                    "pagingType": "numbers"
-                }
-            );
-        }
-        else
-        {
-            $('#tasksTable').DataTable(
-                {
-                    "searching": false,
-                    "lengthChange": false,
-                    "info": false,
-                    "pagingType": "numbers"
-                }
-            );
-        }
-}
 
 function removeSuccessAlert()
 {
     setTimeout(function(){
         let successAlert = document.querySelector('#success-alert');
         if (successAlert != null) successAlert.parentNode.removeChild(successAlert);
-    },2000);
+    }, 2000);
 }
 
 function changeCompletionStatus()
@@ -133,5 +99,35 @@ function editTask()
                     }
                 }
             });
-        }});
+        }
+    });
+}
+
+function addSorting(paginator){
+    let columnHeaders = document.querySelectorAll('#tasksTable th a');
+    for (let i = 0; i < columnHeaders.length; i++){
+        columnHeaders[i].addEventListener('click', event => {
+            event.preventDefault();
+            if (columnHeaders[i].classList.contains('asc')){
+                sortTable(paginator, i, 'asc');
+                columnHeaders[i].classList.replace('asc', 'desc');
+            }
+            else if (columnHeaders[i].classList.contains('desc')){
+                sortTable(paginator, i, 'desc');
+                columnHeaders[i].classList.replace('desc', 'asc');
+            }
+        });
+    }
+}
+
+function sortTable(paginator, columnNumber, order = 'asc'){
+    if (order == 'asc')
+    {
+        paginator.data.sort((a, b) => a.children[columnNumber].innerText.trim() > b.children[columnNumber].innerText.trim());
+    }
+    else if (order == 'desc')
+    {
+        paginator.data.sort((a, b) => a.children[columnNumber].innerText.trim() < b.children[columnNumber].innerText.trim());
+    }
+    paginator.RefreshData();
 }
